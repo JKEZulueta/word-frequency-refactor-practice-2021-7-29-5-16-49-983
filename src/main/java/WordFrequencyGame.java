@@ -3,9 +3,9 @@ import java.util.*;
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
 
-    public String getResult(String sentence){
+    public String getResult(String sentence) {
 
-        if (sentence.split(BLANK_SPACE).length==1) {
+        if (sentence.split(BLANK_SPACE).length == 1) {
             return sentence + " 1";
         } else {
 
@@ -22,10 +22,10 @@ public class WordFrequencyGame {
                 }
 
                 //get the map for the next step of sizing the same word
-                Map<String, List<WordInfo>> map =getListMap(wordInfoList);
+                Map<String, List<WordInfo>> map = getListMap(wordInfoList);
 
                 List<WordInfo> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()){
+                for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()) {
                     WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
                     list.add(wordInfo);
                 }
@@ -35,7 +35,7 @@ public class WordFrequencyGame {
 
                 StringJoiner joiner = new StringJoiner("\n");
                 for (WordInfo w : wordInfoList) {
-                    String s = w.getWord() + " " +w.getCount();
+                    String s = w.getWord() + " " + w.getCount();
                     joiner.add(s);
                 }
                 return joiner.toString();
@@ -48,17 +48,15 @@ public class WordFrequencyGame {
     }
 
 
-    private Map<String,List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
+    private Map<String, List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
         Map<String, List<WordInfo>> map = new HashMap<>();
-        for (WordInfo wordInfo : wordInfoList){
+        for (WordInfo wordInfo : wordInfoList) {
 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!map.containsKey(wordInfo.getWord())){
+            if (!map.containsKey(wordInfo.getWord())) {
                 ArrayList arr = new ArrayList<>();
                 arr.add(wordInfo);
                 map.put(wordInfo.getWord(), arr);
-            }
-
-            else {
+            } else {
                 map.get(wordInfo.getWord()).add(wordInfo);
             }
         }
