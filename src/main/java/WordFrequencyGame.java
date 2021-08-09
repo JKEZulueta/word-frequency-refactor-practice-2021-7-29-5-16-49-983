@@ -3,21 +3,21 @@ import java.util.*;
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
 
-    public String getResult(String inputStr){
+    public String getResult(String sentence){
 
-        if (inputStr.split(BLANK_SPACE).length==1) {
-            return inputStr + " 1";
+        if (sentence.split(BLANK_SPACE).length==1) {
+            return sentence + " 1";
         } else {
 
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split(BLANK_SPACE);
+                String[] arr = sentence.split(BLANK_SPACE);
 
                 List<WordInfo> wordInfoList = new ArrayList<>();
                 //Change for naming
-                for (String s : arr) {
-                    WordInfo wordInfo = new WordInfo(s, 1);
+                for (String w : arr) {
+                    WordInfo wordInfo = new WordInfo(w, 1);
                     wordInfoList.add(wordInfo);
                 }
 
