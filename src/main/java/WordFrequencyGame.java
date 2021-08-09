@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
@@ -8,48 +9,22 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) {
 
-        if (sentence.split(BLANK_SPACE).length == 1) {
-            return sentence + " 1";
-        } else {
 
-            try {
-
-                //split the input string with 1 to n pieces of spaces
-                String[] wordInfoArr = sentence.split(BLANK_SPACE);
-
-                List<WordInfo> wordInfoList = new ArrayList<>();
-                //Change for naming
-                for (String w : wordInfoArr) {
-                    WordInfo wordInfo = new WordInfo(w, 1);
-                    wordInfoList.add(wordInfo);
-                }
-
-                //get the map for the next step of sizing the same word
-                Map<String, List<WordInfo>> map = getListMap(wordInfoList);
-
-                List<WordInfo> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordInfo>> entry : map.entrySet()) {
-                    WordInfo wordInfo = new WordInfo(entry.getKey(), entry.getValue().size());
-                    list.add(wordInfo);
-                }
-                wordInfoList = list;
-
-                wordInfoList.sort((w1, w2) -> w2.getCount() - w1.getCount());
-
-                StringJoiner joiner = new StringJoiner(NEW_LINE);
-                for (WordInfo w : wordInfoList) {
-                    String s = w.getWord() + " " + w.getCount();
-                    joiner.add(s);
-                }
-                return joiner.toString();
-            } catch (Exception e) {
-
-
-                return CALCULATE_ERROR;
-            }
+        try {
+            List<WordInfo> wordInfoList = getListMap(sentence);
+            Map<String, List<WordInfo>> map = getListMap(wordInfoList);
+            
+            return formatWordInfo(wordInfoList);
+        } catch (Exception e) {
+            return CALCULATE_ERROR;
         }
     }
 
+    private String formatWordInfo(List<WordInfo> wordInfoList) {
+        return wordInfoList.stream()
+                .map(wordInfo -> String.format("%s %d", wordInfo.getWord(), wordInfo.getWord()))
+                .collect(Collectors.joining(NEW_LINE));
+    }
 
     private Map<String, List<WordInfo>> getListMap(List<WordInfo> wordInfoList) {
         Map<String, List<WordInfo>> map = new HashMap<>();
