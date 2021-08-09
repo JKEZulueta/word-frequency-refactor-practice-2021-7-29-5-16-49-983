@@ -9,18 +9,16 @@ import static java.util.Collections.frequency;
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
     public static final String NEW_LINE = "\n";
-    public static final String CALCULATE_ERROR = "Calculate Error";
 
 
     public String getResult(String sentence) {
-
 
         try {
             List<WordInfo> wordInfoList = getWordInfoList(sentence);
 
             return formatWordInfo(wordInfoList);
         } catch (Exception e) {
-            return CALCULATE_ERROR;
+            return "Calculate Error";
         }
     }
 
@@ -38,7 +36,6 @@ public class WordFrequencyGame {
                 .map(word -> new WordInfo(word, frequency(wordList, word)))
                 .sorted((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount())
                 .collect(Collectors.toList());
-
     }
 
 }
