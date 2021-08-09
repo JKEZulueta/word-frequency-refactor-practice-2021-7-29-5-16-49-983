@@ -2,6 +2,9 @@ import java.util.*;
 
 public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
+    public static final String NEW_LINE = "\n";
+    public static final String CALCULATE_ERROR = "Calculate Error";
+
 
     public String getResult(String sentence) {
 
@@ -33,7 +36,7 @@ public class WordFrequencyGame {
 
                 wordInfoList.sort((w1, w2) -> w2.getCount() - w1.getCount());
 
-                StringJoiner joiner = new StringJoiner("\n");
+                StringJoiner joiner = new StringJoiner(NEW_LINE);
                 for (WordInfo w : wordInfoList) {
                     String s = w.getWord() + " " + w.getCount();
                     joiner.add(s);
@@ -42,7 +45,7 @@ public class WordFrequencyGame {
             } catch (Exception e) {
 
 
-                return "Calculate Error";
+                return CALCULATE_ERROR;
             }
         }
     }
